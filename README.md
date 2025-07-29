@@ -1,3 +1,3 @@
 # FHSS Work Austin Starter App
 
-This is a starter trianing app using angular. 
+This is a starter training app using angular. 
