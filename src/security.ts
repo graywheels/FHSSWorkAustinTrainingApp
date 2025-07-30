@@ -21,6 +21,7 @@ export type Role = typeof ROLES[number];
  */
 export const PERMISSIONS = [
   'manage-users',
+  'manage-tasks'
 ] as const;
 /**
  * An access permission, granting access to pages and resources.
@@ -32,7 +33,7 @@ export type Permission = typeof PERMISSIONS[number];
  */
 export const ROLE_PERMISSION_MAP: Record<Role, Permission[]> = {
   admin: ['manage-users'],
-  user: []
+  user: ['manage-tasks']
 }
 
 /**
