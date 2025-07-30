@@ -67,8 +67,8 @@ model Task {
   description String
   status      TaskStatus @default(Incomplete)
   completedAt DateTime?
-  owner       User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  ownerId     String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
 }
 
 enum TaskStatus {
