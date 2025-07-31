@@ -12,7 +12,7 @@ import { ByuHeaderComponent, HeaderConfig } from '@fhss-web-team/frontend-utils'
 
 export class ByuLayout {
   headerConfig: HeaderConfig = {
-    title: { text: "austin's toodoo", path: '' },
+    title: { text: "toodoo", path: '' },
     menu: [
       { text: 'Home', path: '' },
       { text: 'My Lists', path: '/lists' },
