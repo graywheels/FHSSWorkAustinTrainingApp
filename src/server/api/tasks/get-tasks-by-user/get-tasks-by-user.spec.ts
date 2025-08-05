@@ -3,6 +3,7 @@ import { appRouter } from '../../api.routes';
 import { vi, describe, expect, it } from 'vitest';
 import { faker } from '@faker-js/faker';
 import { prisma, User } from '../../../../../prisma/client';
+import { generateDummyTaskData } from '../../../dummy/helpers/dummy-task';
 
 describe('Get tasks by user', () => {
   let requestingUser: User;
@@ -27,7 +28,7 @@ describe('Get tasks by user', () => {
     await prisma.user.delete({ where: { id: requestingUser.id } });
   });
 
-  it('gets the tasks', async () => {
+it('errors on bad pagination', async () => {
   const total = 5;
   const page = 3;
   const tasks = await prisma.task.createManyAndReturn({
@@ -36,17 +37,19 @@ describe('Get tasks by user', () => {
       () => generateDummyTaskData({ ownerId: requestingUser.id })
     ),
   });
+
+  let error;
   try {
-    // ...
+    await getTasksByUser({ pageSize: page, pageOffset: total }); // attempt to skip all of the items
+  } catch (err) {
+    error = err;
   } finally {
     await prisma.task.deleteMany({ 
-      where: { 
-        id: { 
-          in: tasks.map(task => task.id) 
-        } 
-      } 
+      where: { id: { in: tasks.map(task => task.id) } } 
     });
   }
+
+  expect(error).toHaveProperty('code', 'BAD_REQUEST');
 });
 
 });

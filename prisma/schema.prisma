@@ -60,18 +60,18 @@ model User {
 }
 
 model Task {
-  id          String     @id @default(uuid())
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id          String    @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   title       String
   description String
-  status      TaskStatus @default(Incomplete)
+  status      Status    @default(Incomplete)
   completedAt DateTime?
-  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String
+  user        User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId     String
 }
 
-enum TaskStatus {
+enum Status {
   Complete
   Incomplete
   InProgress
