@@ -103,9 +103,9 @@ export class UserTableComponent {
 
   openUserCreate() {
     const dialogRef = this.dialog.open(UserCreateDialog);
-    dialogRef.afterClosed().subscribe((userId) => {
-      if (userId) {
-        const ref = this.dialog.open(UserEditComponent, { data: userId });
+    dialogRef.afterClosed().subscribe((ownerId) => {
+      if (ownerId) {
+        const ref = this.dialog.open(UserEditComponent, { data: ownerId });
         ref.afterClosed().subscribe(() => {
           this.table().refresh();
         });

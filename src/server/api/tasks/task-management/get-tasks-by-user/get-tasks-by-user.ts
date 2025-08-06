@@ -1,8 +1,8 @@
 import { z } from 'zod/v4';
-import { prisma } from '../../../../../prisma/client';
-import { authorizedProcedure } from '../../trpc';
+import { prisma } from '../../../../../../prisma/client';
+import { authorizedProcedure } from '../../../trpc';
 import { TRPCError } from '@trpc/server';
-import { Status } from '../../../../../prisma/generated/enums';
+import { Status } from '../../../../../../prisma/generated/enums';
 
 const getTasksByUserInput = z.object({
   pageSize: z.number(),
@@ -34,6 +34,20 @@ export const getTasksByUser = authorizedProcedure
       where: { ownerId: opts.ctx.userId }
     })
 
+    if (opts.input.pageOffset >= totalCount) {
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: `Cannot paginate to item ${opts.input.pageOffset + 1}, as there are only ${totalCount} items`
+      })
+    }
+
+    if (opts.input.pageOffset && opts.input.pageOffset >= totalCount) {
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: `Cannot paginate to item ${opts.input.pageOffset + 1}, as there are only ${totalCount} items`
+      })
+    }
+
     const data = await prisma.task.findMany({
       where: { ownerId: opts.ctx.userId },
       take: opts.input.pageSize,
@@ -42,5 +56,4 @@ export const getTasksByUser = authorizedProcedure
     });
 
     return { data, totalCount };
-    throw new TRPCError({ code: 'NOT_IMPLEMENTED' });
   });

@@ -4,7 +4,7 @@ import { authorizedProcedure } from '../../trpc';
 import { prisma } from '../../../../../prisma/client';
 
 const getUserInput = z.object({
-  userId: z.string(),
+  ownerId: z.string(),
 });
 
 const getUserOutput = z.object({
@@ -32,7 +32,7 @@ export const getUser = authorizedProcedure
   .output(getUserOutput)
   .mutation(async (opts) => {
     const user = await prisma.user.findUnique({
-      where: { id: opts.input.userId },
+      where: { id: opts.input.ownerId },
     });
     if (!user) {
       throw new TRPCError({ code: 'NOT_FOUND' });

@@ -52,17 +52,17 @@ class UserService implements UserServiceType<Role, User> {
     return await prisma.user.update({ where: { netId }, data: byu });
   }
 
-  async updateLastLogin(userId: string): Promise<void> {
+  async updateLastLogin(ownerId: string): Promise<void> {
     await prisma.user.update({
-      where: { id: userId },
+      where: { id: ownerId },
       data: {
         lastLogin: new Date(),
       },
     });
   }
-  findUser(by: { netId?: string; userId?: string }): Promise<User | null> {
+  findUser(by: { netId?: string; ownerId?: string }): Promise<User | null> {
     return prisma.user.findUnique({
-      where: { id: by.userId, netId: by.netId },
+      where: { id: by.ownerId, netId: by.netId },
     });
   }
   getAllIds = () =>

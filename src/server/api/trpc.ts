@@ -25,7 +25,7 @@ export const publicProcedure = t.procedure;
 /**
  * A tRPC middleware procedure that ensures the request is authenticated.
  *
- * This procedure checks if a `userId` exists in the request context. If not, it throws an `UNAUTHORIZED` error.
+ * This procedure checks if a `ownerId` exists in the request context. If not, it throws an `UNAUTHORIZED` error.
  * It then verifies the existence of the user in the database using Prisma. If the user is not found, it throws an `UNAUTHORIZED` error.
  */
 export const authenticatedProcedure = publicProcedure.use(

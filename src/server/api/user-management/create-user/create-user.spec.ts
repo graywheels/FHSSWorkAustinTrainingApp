@@ -25,7 +25,7 @@ describe('Create User', () => {
       }),
     });
 
-    createUser = appRouter.createCaller({ userId: requestingUser.id })
+    createUser = appRouter.createCaller({ ownerId: requestingUser.id })
       .userManagement.createUser;
 
     dummyAccount = generateDummyAccountData(ByuAccountType.Student);

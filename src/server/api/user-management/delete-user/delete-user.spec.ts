@@ -17,7 +17,7 @@ describe('Delete user', () => {
         roles: [],
       }),
     });
-    deleteUser = appRouter.createCaller({ userId: requestingUser.id })
+    deleteUser = appRouter.createCaller({ ownerId: requestingUser.id })
       .userManagement.deleteUser;
   });
 
@@ -29,7 +29,7 @@ describe('Delete user', () => {
     const userData = generateDummyUserData({});
     const user = await prisma.user.create({ data: userData });
 
-    await deleteUser({ userId: user.id });
+    await deleteUser({ ownerId: user.id });
     const foundUser = await prisma.user.findUnique({
       where: { netId: userData.netId },
     });
@@ -40,7 +40,7 @@ describe('Delete user', () => {
   it("errors if user doesn't exist", async () => {
     let error;
     try {
-      await deleteUser({ userId: faker.string.uuid() });
+      await deleteUser({ ownerId: faker.string.uuid() });
     } catch (err) {
       error = err;
     }

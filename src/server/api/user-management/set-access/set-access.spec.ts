@@ -17,7 +17,7 @@ describe('Set access', () => {
         roles: [],
       }),
     });
-    setAccess = appRouter.createCaller({ userId: requestingUser.id })
+    setAccess = appRouter.createCaller({ ownerId: requestingUser.id })
       .userManagement.setAccess;
   });
 
@@ -28,7 +28,7 @@ describe('Set access', () => {
   it('errors if no roles nor permissions are provided', async () => {
     let err;
     try {
-      await setAccess({ userId: requestingUser.id });
+      await setAccess({ ownerId: requestingUser.id });
     } catch (error) {
       err = error;
     }
@@ -40,7 +40,7 @@ describe('Set access', () => {
   it("errors if user doesn't exist", async () => {
     let err;
     try {
-      await setAccess({ userId: faker.string.uuid(), roles: ['admin'] });
+      await setAccess({ ownerId: faker.string.uuid(), roles: ['admin'] });
     } catch (error) {
       err = error;
     }
@@ -53,7 +53,7 @@ describe('Set access', () => {
     const user = await prisma.user.create({ data: userData });
     try {
       await setAccess({
-        userId: user.id,
+        ownerId: user.id,
         roles: ['user'],
         permissions: ['manage-users'],
       });
@@ -79,7 +79,7 @@ describe('Set access', () => {
     });
     try {
       await setAccess({
-        userId: user.id,
+        ownerId: user.id,
         roles: [],
         permissions: [],
       });
@@ -103,7 +103,7 @@ describe('Set access', () => {
     });
     try {
       await setAccess({
-        userId: user.id,
+        ownerId: user.id,
         permissions: [],
       });
 

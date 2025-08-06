@@ -41,11 +41,11 @@ export class UserEditComponent {
   readonly trpc = inject(TRPC_CLIENT);
   readonly dialog = inject(MatDialog);
   readonly dialogRef = inject(MatDialogRef<UserEditComponent>);
-  readonly userId: string | undefined = inject(MAT_DIALOG_DATA);
+  readonly ownerId: string | undefined = inject(MAT_DIALOG_DATA);
 
   userResource = trpcResource(
     this.trpc.userManagement.getUser.mutate,
-    () => ({ userId: this.userId ?? '' }),
+    () => ({ ownerId: this.ownerId ?? '' }),
     { autoRefresh: true },
   );
 
@@ -85,7 +85,7 @@ export class UserEditComponent {
     confirmationRef.afterClosed().subscribe(async (yes) => {
       if (yes) {
         try {
-          await this.trpc.userManagement.deleteUser.mutate({ userId: user.id });
+          await this.trpc.userManagement.deleteUser.mutate({ ownerId: user.id });
           this.dialogRef.close('delete');
         } catch (error) {
           console.error(error);
@@ -101,7 +101,7 @@ export class UserEditComponent {
   saveAccess() {
     try {
       this.trpc.userManagement.setAccess.mutate({
-        userId: this.user()!.id,
+        ownerId: this.user()!.id,
         roles: this.user()!.roles as Role[],
         permissions: this.user()!.permissions as Permission[],
       });

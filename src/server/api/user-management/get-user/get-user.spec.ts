@@ -17,7 +17,7 @@ describe('Get user', () => {
         roles: [],
       }),
     });
-    getUser = appRouter.createCaller({ userId: requestingUser.id })
+    getUser = appRouter.createCaller({ ownerId: requestingUser.id })
       .userManagement.getUser;
   });
 
@@ -29,7 +29,7 @@ describe('Get user', () => {
     const userData = generateDummyUserData({});
     const user = await prisma.user.create({ data: userData });
     try {
-      const foundUser = await getUser({ userId: user.id });
+      const foundUser = await getUser({ ownerId: user.id });
 
       expect(foundUser.id).toBe(user.id);
     } finally {
@@ -40,7 +40,7 @@ describe('Get user', () => {
   it("errors if user doesn't exist", async () => {
     let error;
     try {
-      await getUser({ userId: 'i-dont-exist' });
+      await getUser({ ownerId: 'i-dont-exist' });
     } catch (err) {
       error = err;
     }

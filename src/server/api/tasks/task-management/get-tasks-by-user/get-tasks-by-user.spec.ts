@@ -1,9 +1,9 @@
-import { generateDummyUserData } from '../../../dummy/helpers/dummy-user';
-import { appRouter } from '../../api.routes';
+import { generateDummyUserData } from '../../../../dummy/helpers/dummy-user';
+import { appRouter } from '../../../api.routes';
 import { vi, describe, expect, it } from 'vitest';
 import { faker } from '@faker-js/faker';
-import { prisma, User } from '../../../../../prisma/client';
-import { generateDummyTaskData } from '../../../dummy/helpers/dummy-task';
+import { prisma, User } from '../../../../../../prisma/client';
+import { generateDummyTaskData } from '../../../../dummy/helpers/dummy-task';
 
 describe('Get tasks by user', () => {
   let requestingUser: User;
@@ -15,7 +15,7 @@ describe('Get tasks by user', () => {
     requestingUser = await prisma.user.create({
       data: generateDummyUserData({
         permissions: [],
-        roles: [],
+        roles: ['user'],
       }),
     });
     getTasksByUser = appRouter
@@ -50,6 +50,13 @@ it('errors on bad pagination', async () => {
   }
 
   expect(error).toHaveProperty('code', 'BAD_REQUEST');
+});
+
+it('returns empty if empty database', async () => {
+  const result = await getTasksByUser({ pageSize: 10, pageOffset: 0 });
+
+  expect(result).toHaveProperty('totalCount', 0);
+  expect(result.data).length(0);
 });
 
 });

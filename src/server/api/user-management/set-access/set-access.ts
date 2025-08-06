@@ -6,7 +6,7 @@ import { TRPCError } from '@trpc/server';
 import { isPrismaError } from '../../../utils/prisma';
 
 const setAccessInput = z.object({
-  userId: z.string(),
+  ownerId: z.string(),
   roles: z.array(z.literal(ROLES)).optional(),
   permissions: z.array(z.literal(PERMISSIONS)).optional(),
 });
@@ -44,7 +44,7 @@ export const setAccess = authorizedProcedure
     }
     try {
       return await prisma.user.update({
-        where: { id: input.userId },
+        where: { id: input.ownerId },
         data: {
           roles: input.roles,
           permissions: input.permissions,

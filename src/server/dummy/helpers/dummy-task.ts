@@ -13,7 +13,7 @@ export function generateDummyTaskData(opts: {
   title?: string;
   description?: string;
   status?: Status;
-  completedDate?: Date;
+  completedAt?: Date;
   updatedAt?: Date;
   createdAt?: Date;
 }) {
@@ -22,7 +22,7 @@ export function generateDummyTaskData(opts: {
     title: opts.title ?? faker.book.title(),
     description: opts.description ?? faker.hacker.phrase(),
     status: opts.status ?? getRandomStatus(),
-    completedDate: opts.completedDate ?? faker.date.recent(),
+    completedAt: opts.completedAt ?? faker.date.recent(),
     updatedAt: opts.updatedAt ?? faker.date.recent(),
     createdAt: opts.createdAt ?? faker.date.past(),
   };

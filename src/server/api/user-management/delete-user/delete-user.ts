@@ -5,7 +5,7 @@ import { authorizedProcedure } from '../../trpc';
 import { isPrismaError } from '../../../utils/prisma';
 
 const deleteUserInput = z.object({
-  userId: z.string(),
+  ownerId: z.string(),
 });
 
 const deleteUserOutput = z.void();
@@ -16,7 +16,7 @@ export const deleteUser = authorizedProcedure
   .output(deleteUserOutput)
   .mutation(async (opts) => {
     try {
-      await prisma.user.delete({ where: { id: opts.input.userId } });
+      await prisma.user.delete({ where: { id: opts.input.ownerId } });
     } catch (err) {
       if (isPrismaError(err, 'NOT_FOUND')) {
         throw new TRPCError({
