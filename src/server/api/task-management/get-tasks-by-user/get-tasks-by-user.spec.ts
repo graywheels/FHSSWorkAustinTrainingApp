@@ -1,9 +1,9 @@
-import { generateDummyUserData } from '../../../../dummy/helpers/dummy-user';
+import { generateDummyUserData } from '../../../dummy/helpers/dummy-user';
 import { appRouter } from '../../../api.routes';
 import { vi, describe, expect, it } from 'vitest';
 import { faker } from '@faker-js/faker';
-import { prisma, User } from '../../../../../../prisma/client';
-import { generateDummyTaskData } from '../../../../dummy/helpers/dummy-task';
+import { prisma, User } from '../../../../../prisma/client';
+import { generateDummyTaskData } from '../../../dummy/helpers/dummy-task';
 
 describe('Get tasks by user', () => {
   let requestingUser: User;

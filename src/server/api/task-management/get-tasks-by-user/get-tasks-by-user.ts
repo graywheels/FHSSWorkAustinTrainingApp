@@ -1,8 +1,8 @@
 import { z } from 'zod/v4';
-import { prisma } from '../../../../../../prisma/client';
-import { authorizedProcedure } from '../../../trpc';
+import { prisma } from '../../../../../prisma/client';
+import { authorizedProcedure } from '../../trpc';
 import { TRPCError } from '@trpc/server';
-import { Status } from '../../../../../../prisma/generated/enums';
+import { Status } from '../../../../../prisma/generated/enums';
 
 const getTasksByUserInput = z.object({
   pageSize: z.number(),
