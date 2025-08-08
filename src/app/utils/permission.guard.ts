@@ -1,5 +1,7 @@
 import { permissionGuardFactory } from "@fhss-web-team/frontend-utils";
 import { Permission } from "../../security";
+import { TasksPage } from "../pages/tasks/tasks.page";
+import { Routes } from "@angular/router";
 
 /**
  * A permission-based route guard.
@@ -27,3 +29,12 @@ import { Permission } from "../../security";
  * @see Permission
  */
 export const permissionGuard = permissionGuardFactory<Permission>;
+
+ const routes: Routes = [
+   {
+     path: 'app-tasks',
+     component: TasksPage,
+     canActivate: [permissionGuard],
+     data: { requiredPermission: 'manage-task' },
+    },
+ ];

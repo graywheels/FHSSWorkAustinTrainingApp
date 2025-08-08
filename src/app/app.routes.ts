@@ -6,7 +6,9 @@ import {
   ServerErrorPage,
 } from '@fhss-web-team/frontend-utils';
 import { HomePage } from './pages/home/home.page';
+import { TasksPage } from './pages/tasks/tasks.page';
 import { ByuLayout } from './layouts/byu/byu.layout';
+import { permissionGuard } from './utils/permission.guard';
 
 export const routes: Routes = [
   { path: 'server-error', component: ServerErrorPage },
@@ -16,7 +18,12 @@ export const routes: Routes = [
     path: '',
     component: ByuLayout,
     children: [
-      { path: '', component: HomePage }
+      { path: '', component: HomePage },
+      { 
+        path: 'app-tasks', 
+        component: TasksPage, 
+        canActivate: [permissionGuard(['manage-tasks'])], 
+      },
     ],
   },
   { path: '**', component: NotFoundPage },
