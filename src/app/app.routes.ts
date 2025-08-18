@@ -19,11 +19,7 @@ export const routes: Routes = [
     component: ByuLayout,
     children: [
       { path: '', component: HomePage },
-      { 
-        path: 'app-tasks', 
-        component: TasksPage, 
-        canActivate: [permissionGuard(['manage-tasks'])], 
-      },
+      { path: 'tasks', component: TasksPage, canActivate: [permissionGuard(['manage-tasks'])] },
     ],
   },
   { path: '**', component: NotFoundPage },

@@ -39,7 +39,7 @@ export const ROLE_PERMISSION_MAP: Record<Role, Permission[]> = {
 /**
  * The role given to newly provisioned users.
  */
-export const DEFAULT_ROLE: Role | null = null;
+export const DEFAULT_ROLE: Role | null = 'user';
 
 /**
  * A map specifying to which route the user should 

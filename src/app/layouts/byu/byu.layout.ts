@@ -1,22 +1,20 @@
 import { RouterOutlet } from '@angular/router';
 import { Component } from '@angular/core';
 import { ByuHeaderComponent, HeaderConfig } from '@fhss-web-team/frontend-utils';
-
+import { Permission } from '../../../security';
 
 @Component({
-  selector: 'app-byu',
-  imports: [RouterOutlet, ByuHeaderComponent], // Add the component here
+  selector: 'app-byu-layout',
+  imports: [RouterOutlet, ByuHeaderComponent],
   templateUrl: './byu.layout.html',
-  styleUrl: './byu.layout.scss',
+  styleUrl: './byu.layout.scss'
 })
-
 export class ByuLayout {
   headerConfig: HeaderConfig = {
-    title: { text: "toodoo", path: '' },
+    title: { text: 'toodoo', path: '' },
     menu: [
       { text: 'Home', path: '' },
-      { text: 'My Lists', path: '/lists' },
-      { text: 'Tasks', path: 'app-tasks'}
+      { text: 'My Tasks', path: '/tasks' }
     ],
   };
 }

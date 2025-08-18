@@ -29,12 +29,3 @@ import { Routes } from "@angular/router";
  * @see Permission
  */
 export const permissionGuard = permissionGuardFactory<Permission>;
-
- const routes: Routes = [
-   {
-     path: 'app-tasks',
-     component: TasksPage,
-     canActivate: [permissionGuard],
-     data: { requiredPermission: 'manage-task' },
-    },
- ];
