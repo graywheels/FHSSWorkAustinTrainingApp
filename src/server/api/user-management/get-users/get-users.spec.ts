@@ -17,7 +17,7 @@ describe('Get users', () => {
         roles: [],
       }),
     });
-    getUsers = appRouter.createCaller({ ownerId: requestingUser.id })
+    getUsers = appRouter.createCaller({ userId: requestingUser.id })
       .userManagement.getUsers;
   });
 

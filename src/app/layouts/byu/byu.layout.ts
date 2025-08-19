@@ -11,7 +11,7 @@ import { Permission } from '../../../security';
 })
 export class ByuLayout {
   headerConfig: HeaderConfig = {
-    title: { text: 'toodoo', path: '' },
+    title: { text: 'toodoo', path: '/' },
     menu: [
       { text: 'Home', path: '' },
       { text: 'My Tasks', path: '/tasks' }

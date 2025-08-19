@@ -32,7 +32,7 @@ export type Permission = typeof PERMISSIONS[number];
  * Maps each user role to an array of permissions granted to that role.
  */
 export const ROLE_PERMISSION_MAP: Record<Role, Permission[]> = {
-  admin: ['manage-users'],
+  admin: ['manage-users', 'manage-tasks'],
   user: ['manage-tasks']
 }
 
