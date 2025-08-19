@@ -14,11 +14,12 @@ export const routes: Routes = [
   { path: 'server-error', component: ServerErrorPage },
   { path: 'forbidden', component: ForbiddenPage },
   { path: 'auth-error', component: AuthErrorPage },
-  { path: '',
+  {
+    path: '',
     component: ByuLayout,
     children: [
       { path: 'tasks', component: TasksPage, canActivate: [permissionGuard(['manage-tasks'])] },
-      { path: '', component: HomePage }
+      { path: '', component: HomePage },
     ],
   },
   { path: '**', component: NotFoundPage },
