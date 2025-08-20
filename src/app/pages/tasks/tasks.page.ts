@@ -28,4 +28,10 @@ export class TasksPage {
     }),
     { autoRefresh: true }
   );
+
+  handlePageEvent(e: PageEvent) {
+    this.pageOffset.set(e.pageIndex * e.pageSize);
+  }
+
+
 }

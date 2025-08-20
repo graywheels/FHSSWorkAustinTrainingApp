@@ -1,0 +1,42 @@
+:host {
+  --card-width: 400px;
+  --card-gap: 12px;
+  --page-padding: 2em;
+  display: flex;
+  flex-direction: column;
+  max-width: calc(var(--card-width) * 4 + var(--card-gap) * 3 + var(--page-padding) * 2);
+  margin-inline: auto;
+  padding: 0 var(--page-padding);
+}
+
+mat-paginator {
+  background-color: inherit;
+}
+
+.task-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--card-width));
+  gap: var(--card-gap);
+  justify-content: center;
+}
+
+button[mat-fab] {
+  --offset: 40px;
+  position: fixed;
+  align-self: end;
+  bottom: var(--offset);
+  margin-right: var(--offset);
+}
+
+.shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
