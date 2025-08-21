@@ -1,19 +1,35 @@
-<!-- 
-
-
-<p>task-card works!</p>
 <mat-card class="task-card" appearance="raised">
-      <mat-card-header class="task-header">
-        <mat-card-title>title goes here</mat-card-title>
-      </mat-card-header>
-        
-      <mat-card-content>
-        content goes here
-      </mat-card-content>
+  @if (editMode()) {
+    <mat-card-content>
+      <mat-form-field class="edit-field">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="newTitle">
+      </mat-form-field>
+      <mat-form-field class="edit-field">
+        <mat-label>Description</mat-label>
+        <textarea class="description-text-area" matInput [(ngModel)]="newDescription"></textarea>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions class="button-row">
+      <button mat-mini-fab aria-label="save button" (click)="editMode.set(false)">
+        <mat-icon>save</mat-icon>
+      </button>
+    </mat-card-actions>
+  }
+
+  @else {
+    <mat-card-header class="task-header">
+      <mat-card-title><!-- title goes here --></mat-card-title>
+    </mat-card-header>
   
-      <mat-card-actions class="button-footer">
-        <button mat-mini-fab aria-label="edit button">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </mat-card-actions>
-  </mat-card> -->
+    <mat-card-content>
+      <!-- view mode display goes here -->
+    </mat-card-content>
+
+    <mat-card-actions class="button-footer">
+      <button mat-mini-fab aria-label="edit button" (click)="editMode.set(true)">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-card-actions>
+  }
+</mat-card>
