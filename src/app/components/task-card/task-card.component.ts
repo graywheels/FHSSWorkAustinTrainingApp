@@ -21,6 +21,8 @@ import { MatSelectModule } from "@angular/material/select";
 
 export class TaskCardComponent {
   trpc = inject(TRPC_CLIENT)
+  deleteTaskEvent = output<string>(); // declare a new output event that emits a string (the taskId to delete).
+  // ...
 
   editMode = signal<boolean>(false);
   initialTaskValue = input.required<Task>(); //declares an input signal of type Task. 
@@ -67,6 +69,10 @@ export class TaskCardComponent {
     this.newDescription.set(this.taskCardState.value()?.description ?? '')
     this.editMode.set(false);
     this.newStatus.set(this.taskCardState.value()?.status ?? 'Incomplete');
+  }
+
+  deleteTask() {
+    this.deleteTaskEvent.emit(this.initialTaskValue().id);
   }
   // ...
 }

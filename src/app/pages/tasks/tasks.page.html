@@ -24,10 +24,19 @@
 }
 
 
+<section class="create-task">
+  <button mat-fab color="primary" aria-label="add task button" (click)="openNewTaskModal()">
+    <mat-icon>add</mat-icon>
+  </button>
+</section>
+
 <!-- task list -->
 
 <section class="task-list">
-  @for (task of getTasks.value()?.data; track task.id) {
-    <app-task-card [initialTaskValue]="task"></app-task-card>
+  @if (showCreateModal() && paginator().pageIndex === 0) {
+    <app-task-create-modal (cancelHandler)="showCreateModal.set(false)" (saveHandler)="taskCreated()"></app-task-create-modal>
+  }
+  @for (task of taskResource.value()?.data; track task.id) {
+    <app-task-card [initialTaskValue]="task" (deleteTaskEvent)="deleteTask($event)"></app-task-card>
   }
 </section>
